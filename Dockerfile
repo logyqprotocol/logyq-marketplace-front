@@ -47,7 +47,8 @@ COPY --from=builder /usr/demarketplace/public ./public
 COPY --from=builder /usr/demarketplace/node_modules ./node_modules
 COPY --from=builder /usr/demarketplace/package.json ./package.json
 
-# Automatically leverage output traces to reduce image size 
+# Automatically leverage output traces to reduce image size
+ 
 # https://nextjs.org/docs/advanced-features/output-file-tracing
 #COPY --from=builder --chown=nextjs:nodejs /usr/demarketplace/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /usr/demarketplace/.next ./.next
