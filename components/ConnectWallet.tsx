@@ -4,7 +4,7 @@ import Styles from './styles/ConnectWallet.module.css';
 import {formatBalance, getShortAddress} from '../utils/functions';
 import { Address, ProviderRpcClient } from 'everscale-inpage-provider';
 
-function ConnectWallet(props: { venomConnect: VenomConnect | undefined }) {
+function ConnectWallet(props: { venomConnect: VenomConnect | undefined, onConnect: (provider: ProviderRpcClient | undefined, address: Address | undefined) => void }) {
   const login = async () => {
     if (!props.venomConnect) return;
     await props.venomConnect.connect();
@@ -22,7 +22,7 @@ function ConnectWallet(props: { venomConnect: VenomConnect | undefined }) {
 
   const getBalance = async (provider: any) => {
     const providerState = await provider?.getProviderState?.();
-    const _address = providerState?.permissions.accountInteraction?.address
+    const _address : Address = providerState?.permissions.accountInteraction?.address;
     return (await provider?.getBalance?.(_address));
   };
 
@@ -40,6 +40,12 @@ function ConnectWallet(props: { venomConnect: VenomConnect | undefined }) {
     setVenomProvider(provider);
     await onProviderReady(provider);
   };
+
+  useEffect(() => {
+    props.onConnect(venomProvider, address);
+  }, [venomProvider, address]);
+
+    
   // This handler will be called after venomConnect.disconnect() action
   // By click logout. We need to reset address and balance.
   const onDisconnect = async () => {

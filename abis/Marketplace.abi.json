@@ -12,14 +12,6 @@
 			]
 		},
 		{
-			"name": "getFirstElement",
-			"inputs": [
-			],
-			"outputs": [
-				{"name":"_offersCounter","type":"uint256"}
-			]
-		},
-		{
 			"name": "totalOffers",
 			"inputs": [
 				{"name":"_listingId","type":"uint256"}
@@ -89,6 +81,15 @@
 				{"name":"amount","type":"uint256"},
 				{"name":"buyer","type":"address"},
 				{"name":"status","type":"uint8"}
+			]
+		},
+		{
+			"name": "getListingOffers",
+			"inputs": [
+				{"name":"_listingId","type":"uint256"}
+			],
+			"outputs": [
+				{"components":[{"name":"amount","type":"uint256"},{"name":"buyer","type":"address"},{"name":"status","type":"uint8"}],"name":"offers","type":"map(uint256,tuple)"}
 			]
 		},
 		{

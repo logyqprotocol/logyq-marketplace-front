@@ -47,7 +47,6 @@ function CardContainer(props: { venomConnect: VenomConnect | undefined }) {
         listing[1]["id"] = listing[0];
         _listings.push(listing[1]);
       });
-      console.log(_listings);
       setListings(_listings);
       setIsLoading(false);
     } catch (e) {

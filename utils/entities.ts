@@ -1,7 +1,7 @@
 import { Address } from "everscale-inpage-provider";
 
 type Listing = {
-    id: string;
+    id?: string;
     title: string;
     description: string;
     price: string;
@@ -11,4 +11,11 @@ type Listing = {
     sold: boolean;
 }
 
-export type { Listing };
+type Offer = {
+    amount: string;
+    buyer: Address;
+    id?: string;
+    status: string;
+}
+
+export type { Listing, Offer };
