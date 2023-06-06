@@ -15,10 +15,12 @@ WORKDIR /usr/demarketplace
 COPY --from=deps /usr/demarketplace/node_modules ./node_modules
 COPY . .
 
-#Backend env
-#ARG NEXT_PUBLIC_VARNAME_ENV
-#ENV NEXT_PUBLIC_VARNAME_ENV=$NEXT_PUBLIC_VARNAME_ENV
 
+ARG NEXT_PUBLIC_CONTRACTADDR
+ENV NEXT_PUBLIC_CONTRACTADDR=$NEXT_PUBLIC_CONTRACTADDR
+
+ARG NEXT_PUBLIC_EXPLORER
+ENV NEXT_PUBLIC_EXPLORER=$NEXT_PUBLIC_EXPLORER
 
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry
