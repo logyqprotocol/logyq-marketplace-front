@@ -1,24 +1,18 @@
-import React, { CSSProperties, useEffect, useState } from "react";
-import Card from "./Card";
+import { useEffect, useState } from "react";
 import Styles from "./styles/Listing.module.css";
 import {
   Address,
-  Contract,
   ProviderRpcClient,
 } from "everscale-inpage-provider";
 import { CONTRACT_ADDR, EXPLORER } from "../public-env";
 import Abi from "../abis/Marketplace.abi.json";
-import { EverscaleStandaloneClient } from "everscale-standalone-client";
-import { VenomConnect } from "venom-connect";
-import Loader from "./Loader";
-import { Listing, Offer } from "../utils/entities";
-import Skeleton from "react-loading-skeleton";
+import { VenomConnect } from 'venom-connect';
 import "react-loading-skeleton/dist/skeleton.css";
 import OffersTable from "./OffersTable";
-import { Tooltip as ReactTooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
-import { useRouter } from "next/navigation";
 import { formatBalance, getShortAddress } from "../utils/functions";
+import BiddingContainer from "./BiddingContainer";
+import { Listing } from "../utils/entities";
 
 function ListingContainer(props: {
   venomConnect: VenomConnect | undefined;
@@ -47,6 +41,7 @@ function ListingContainer(props: {
     }
   }, [props.venomConnect, provider]);
 
+  
   const fetchListing = async (
     provider: ProviderRpcClient
   ): Promise<string | undefined> => {
@@ -91,7 +86,7 @@ function ListingContainer(props: {
   };
 
 
-  if (listing && offers) {
+  if (listing && offers && !isLoading) {
     return (
       <div className={Styles.listingContainer}>
         <div className={Styles.left}>
@@ -99,17 +94,17 @@ function ListingContainer(props: {
             <div className={Styles.imgBox}>{/* TODO: Add image here */}</div>
             <div className={Styles.infoBox}>
               <h2>{listing.title}</h2>
-              {listing.sold && "This listing is closed."}
               <div>{formatBalance(listing.price)} VENOM</div>
                 <div>Owned by <a href={`${EXPLORER}/accounts/${listing.seller.toString()}`}>{getShortAddress(listing.seller, 7,7)}</a></div>
-              <div>This listing received {listing.offersCounter} {parseInt(listing.offersCounter) != 1 ? "offers" : "offer"}</div>
+              <div>This listing received {listing.offersCounter} {parseInt(listing.offersCounter) !== 1 ? "offers" : "offer"}</div>
             </div>
             <div className={Styles.descBox}>
               <h3>Description</h3>
               <p>{listing.description}</p>
             </div>
           </div>
-        </div>
+          { listing.seller !== props.userAddress && <BiddingContainer listing={listing} isClosed={listing.sold} userProvider={props.userProvider} listingId={props.id as string} address={props.userAddress}/>}
+          </div>
         <div className={Styles.right}>
           <OffersTable address={props.userAddress} userProvider={props.userProvider} listingId={props.id as string} isSeller={true} offers={offers} />
         </div>

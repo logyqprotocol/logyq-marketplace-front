@@ -9,6 +9,7 @@ type Listing = {
     offers: any[];
     offersCounter: string;
     sold: boolean;
+    timestamp: string;
 }
 
 type Offer = {
@@ -16,6 +17,7 @@ type Offer = {
     buyer: Address;
     id?: string;
     status: string;
+    timestamp: string;
 }
 
 export type { Listing, Offer };

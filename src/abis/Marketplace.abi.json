@@ -31,6 +31,15 @@
 			]
 		},
 		{
+			"name": "getListingIdsBySeller",
+			"inputs": [
+				{"name":"_seller","type":"address"}
+			],
+			"outputs": [
+				{"name":"_listingIds","type":"uint256[]"}
+			]
+		},
+		{
 			"name": "makeOffer",
 			"inputs": [
 				{"name":"_amount","type":"uint256"},
@@ -89,7 +98,7 @@
 				{"name":"_listingId","type":"uint256"}
 			],
 			"outputs": [
-				{"components":[{"name":"amount","type":"uint256"},{"name":"buyer","type":"address"},{"name":"status","type":"uint8"}],"name":"offers","type":"map(uint256,tuple)"}
+				{"components":[{"name":"amount","type":"uint256"},{"name":"buyer","type":"address"},{"name":"status","type":"uint8"},{"name":"timestamp","type":"uint256"}],"name":"offers","type":"map(uint256,tuple)"}
 			]
 		},
 		{
@@ -104,7 +113,15 @@
 			"inputs": [
 			],
 			"outputs": [
-				{"components":[{"name":"title","type":"string"},{"name":"description","type":"string"},{"name":"price","type":"uint256"},{"name":"seller","type":"address"},{"name":"sold","type":"bool"},{"name":"offersCounter","type":"uint256"},{"components":[{"name":"amount","type":"uint256"},{"name":"buyer","type":"address"},{"name":"status","type":"uint8"}],"name":"offers","type":"map(uint256,tuple)"}],"name":"listings","type":"map(uint256,tuple)"}
+				{"components":[{"name":"title","type":"string"},{"name":"description","type":"string"},{"name":"price","type":"uint256"},{"name":"seller","type":"address"},{"name":"sold","type":"bool"},{"name":"offersCounter","type":"uint256"},{"name":"timestamp","type":"uint256"},{"components":[{"name":"amount","type":"uint256"},{"name":"buyer","type":"address"},{"name":"status","type":"uint8"},{"name":"timestamp","type":"uint256"}],"name":"offers","type":"map(uint256,tuple)"}],"name":"listings","type":"map(uint256,tuple)"}
+			]
+		},
+		{
+			"name": "listingsIdsBySeller",
+			"inputs": [
+			],
+			"outputs": [
+				{"name":"listingsIdsBySeller","type":"map(address,uint256[])"}
 			]
 		}
 	],
@@ -153,7 +170,8 @@
 		{"name":"_timestamp","type":"uint64"},
 		{"name":"_constructorFlag","type":"bool"},
 		{"name":"_nonce","type":"uint256"},
-		{"components":[{"name":"title","type":"string"},{"name":"description","type":"string"},{"name":"price","type":"uint256"},{"name":"seller","type":"address"},{"name":"sold","type":"bool"},{"name":"offersCounter","type":"uint256"},{"components":[{"name":"amount","type":"uint256"},{"name":"buyer","type":"address"},{"name":"status","type":"uint8"}],"name":"offers","type":"map(uint256,tuple)"}],"name":"listings","type":"map(uint256,tuple)"},
+		{"components":[{"name":"title","type":"string"},{"name":"description","type":"string"},{"name":"price","type":"uint256"},{"name":"seller","type":"address"},{"name":"sold","type":"bool"},{"name":"offersCounter","type":"uint256"},{"name":"timestamp","type":"uint256"},{"components":[{"name":"amount","type":"uint256"},{"name":"buyer","type":"address"},{"name":"status","type":"uint8"},{"name":"timestamp","type":"uint256"}],"name":"offers","type":"map(uint256,tuple)"}],"name":"listings","type":"map(uint256,tuple)"},
+		{"name":"listingsIdsBySeller","type":"map(address,uint256[])"},
 		{"name":"listingsCounter","type":"uint256"}
 	]
 }

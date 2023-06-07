@@ -6,8 +6,7 @@ import {
   getShortAddress,
   getValueForSend,
 } from "../utils/functions";
-import { useRouter } from "next/navigation";
-import { Listing, Offer } from "../utils/entities";
+import {  Offer } from "../utils/entities";
 import { Tooltip as ReactTooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
 import { EXPLORER } from "../public-env";
@@ -29,14 +28,10 @@ function OfferTable(props: {
   const acceptOffer = async (
     _offerId: number
   ) => {
+    const toastId = toast.loading('Accepting offer...'); 
     try {
-        console.log("userProvider", props.userProvider)
-        console.log("listingId", props.listingId)
-        console.log("_offerId", _offerId)
-        console.log("address", props.address)
         if(!props.userProvider || !props.listingId == undefined || !_offerId == undefined|| !props.address) return;
         const contract = new props.userProvider!.Contract(Abi, new Address(CONTRACT_ADDR));    
-        const toastId = toast.loading('Accepting offer...'); 
         const result = await contract.methods
           .acceptOffer({
             _listingId: props.listingId,
@@ -47,15 +42,14 @@ function OfferTable(props: {
 
         if (result?.id?.lt && result?.endStatus === 'active') {
             toast.dismiss(toastId);
-
-            toast.success("Offer accepted");
+            toast.success("Offer accepted.");
         }else{
             toast.dismiss(toastId);
-
             toast.error("Offer not accepted. Try again.");
 
         }
       } catch (e : any) {
+        toast.dismiss(toastId);
         toast.error(e.message);
     }
 }
@@ -63,6 +57,7 @@ function OfferTable(props: {
 const declineOffer = async (
     _offerId: number
   ) => {
+    const toastId = toast.loading('Declining offer...'); 
     try {
         console.log("userProvider", props.userProvider)
         console.log("listingId", props.listingId)
@@ -77,14 +72,20 @@ const declineOffer = async (
           } as never)
           .send({ from: props.address, amount: getValueForSend(1), bounce: true });
         if (result?.id?.lt && result?.endStatus === 'active') {
-            toast.success("Offer accepted");
+            toast.dismiss(toastId);
+
+            toast.success("Offer declined.");
         }else{
-            toast.error("Offer not accepted. Try again.");
+            toast.dismiss(toastId);
+
+            toast.error("Offer not declined. Try again.");
         }
       } catch (e : any) {
+        toast.dismiss(toastId);
         toast.error(e.message);
     }
 }
+
   if (props.offers) {
     return (
       <>
@@ -105,7 +106,7 @@ const declineOffer = async (
                   <td data-th="Bidder">
                     <a
                       target="_blank"
-                      href={`${EXPLORER}/accounts/${offer.buyer.toString()}`}
+                      href={`${EXPLORER}/accounts/${offer.buyer.toString()}`} rel="noreferrer"
                     >
                       {getShortAddress(offer.buyer)}
                     </a>

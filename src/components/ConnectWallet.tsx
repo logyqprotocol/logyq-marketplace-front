@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { VenomConnect } from 'venom-connect';
 import Styles from './styles/ConnectWallet.module.css';
 import {formatBalance, getShortAddress} from '../utils/functions';
@@ -43,7 +43,7 @@ function ConnectWallet(props: { venomConnect: VenomConnect | undefined, onConnec
 
   useEffect(() => {
     props.onConnect(venomProvider, address);
-  }, [venomProvider, address]);
+  }, [venomProvider, address, props]);
 
     
   // This handler will be called after venomConnect.disconnect() action
