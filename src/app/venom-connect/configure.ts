@@ -20,6 +20,7 @@ export const initVenomConnect = async () => {
             packageOptionsStandalone: {
               fallback: () =>
                 EverscaleStandaloneClient.create({
+                  initInput: '../../node_modules/nekoton-wasm/nekoton_wasm_bg.wasm',
                   connection: {
                     id: 1002,
                     group: 'venom_devnet',
