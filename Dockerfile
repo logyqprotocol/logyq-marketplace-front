@@ -2,7 +2,7 @@ FROM node:15-alpine AS builder
 
 WORKDIR /user/demarketplace
 
-COPY package.json package.json
+COPY . .
 
 ARG REACT_APP_CONTRACTADDR
 ENV REACT_APP_CONTRACTADDR=$REACT_APP_CONTRACTADDR
