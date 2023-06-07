@@ -1,9 +1,9 @@
-"use client";
-import React, { useEffect, useState } from 'react';
-import { initVenomConnect } from './venom-connect/configure';
+import { useEffect, useState } from 'react';
+import { initVenomConnect } from '../venom-connect/configure';
 import VenomConnect from 'venom-connect';
-import CardContainer from '../../components/CardContainer';
-import Nav from '../../components/Nav';
+import CardContainer from '../components/CardContainer';
+import Nav from '../components/Nav';
+
 function App() {
   const [venomConnect, setVenomConnect] = useState<VenomConnect | undefined>();
   const init = async () => {
@@ -22,6 +22,7 @@ function App() {
   const [provider, setProvider] = useState<any>(undefined);
   const [address, setAddress] = useState<any>(undefined);
   return (
+    
     <>
       <Nav onConnect={onConnect} venomConnect={venomConnect}/>
       <CardContainer venomConnect={venomConnect}/>

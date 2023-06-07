@@ -68,5 +68,52 @@
     .listingContainer{
         flex-direction: column;
     }
+    .infoBox{
+        width: 100%;
+        padding: 20px 0px;
+    }
   }
     
+.card input[type="number"]{
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    outline: none;
+    font-size: 1rem;
+    align-self: center;
+}
+
+.noWrap{
+    flex-wrap: nowrap;
+    gap: 15px;
+}
+
+
+.btn {
+    flex-shrink: 0;
+    background: #34398d;
+    opacity: 0.9;
+    border-radius: 20px;
+    padding: 10px 25px;
+    color: #fff;
+    cursor: pointer;
+    align-self: center;
+}
+
+.btnOutlined{
+    background: transparent;
+    border: 1px solid #34398d;
+    color: #34398d;
+    opacity: 0.7;
+}
+
+.btn:not(.btn.btnOutlined):hover {
+    background: #34398d;
+    opacity: 1;
+}
+
+.btnOutlined:hover{
+    opacity: 1;
+
+}

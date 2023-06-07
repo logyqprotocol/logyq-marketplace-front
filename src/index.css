@@ -15,7 +15,8 @@ body{
     text-align: left;
     text-decoration: none;
     text-indent: 0;
-}
+    font-family: 'Open Sans', sans-serif;
+    }
 
 h1, h2, h3{
     width: fit-content;
@@ -29,6 +30,7 @@ h1, h2, h3{
 
 h1{
     font-size: 2rem;
+    width: 100%;
 }
 
 h2{
@@ -42,3 +44,23 @@ h3{
 a{
     color: #34398D;
 }
+
+.btn {
+    background: #34398d;
+    opacity: 0.9;
+    border-radius: 20px;
+    padding: 10px 25px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #34398d;
+    opacity: 1;
+}
+
+.errorBox{
+    color: red;
+    margin: 5px 0;
+    height: 20px;
+  }
