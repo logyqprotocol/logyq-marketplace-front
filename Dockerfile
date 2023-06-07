@@ -1,4 +1,4 @@
-FROM node:15-alpine AS builder
+FROM node:15-alpine
 
 WORKDIR /user/demarketplace
 
@@ -19,14 +19,6 @@ ENV REACT_APP_INFURA_IPFS_PROJECTID=$REACT_APP_INFURA_IPFS_PROJECTID
 RUN npm install -g serve
 RUN npm install
 RUN npm run build
-
-COPY . .
-
-FROM nginx:alpine
-
-RUN rm -rf *
-
-COPY --from=builder /user/demarketplace .
 
 EXPOSE 8080
 CMD ["serve", "-s", "-l", "8080", "./build"]
