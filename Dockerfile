@@ -1,12 +1,8 @@
 FROM node:15-alpine AS builder
 
-WORKDIR /app
+WORKDIR /user/demarketplace
 
 COPY package.json package.json
-
-RUN npm install
-
-COPY . .
 
 ARG REACT_APP_CONTRACTADDR
 ENV REACT_APP_CONTRACTADDR=$REACT_APP_CONTRACTADDR
@@ -20,15 +16,18 @@ ENV REACT_APP_CONTRACTADDR=$REACT_APP_INFURA_IPFS_SECRET
 ARG REACT_APP_INFURA_IPFS_PROJECTID
 ENV REACT_APP_INFURA_IPFS_PROJECTID=$REACT_APP_INFURA_IPFS_PROJECTID
 
+RUN npm install -g serve
+RUN npm install
 RUN npm run build
+
+COPY . .
 
 FROM nginx:alpine
 
-WORKDIR /usr/share/nginx/html
-
 RUN rm -rf *
 
-COPY --from=builder /app/build .
+COPY --from=builder /user/demarketplace .
 
-CMD ["npm", "run", "start"]
+EXPOSE 8080
+CMD ["serve", "-s", "-l", "8080", "./build"]
 
