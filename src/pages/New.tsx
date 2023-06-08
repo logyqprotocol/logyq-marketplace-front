@@ -2,19 +2,14 @@ import React, { useEffect, useState } from 'react';
 import Nav from '../components/Nav';
 import VenomConnect from 'venom-connect';
 import { initVenomConnect } from '../venom-connect/configure';
-import ListingContainer from '../components/ListingContainer';
 import { Address, ProviderRpcClient } from 'everscale-inpage-provider';
-import { useLoaderData, LoaderFunctionArgs } from "react-router-dom";
+import CreationContainer from '../components/CreationContainer';
+import { Toaster } from 'react-hot-toast';
 import SideNav from '../components/SideNav';
 
 
-export async function loader({ params } : LoaderFunctionArgs) {
-  const id = (params.listingId);
-  return { id };
-}
 
-function ListingPage() {
-  const  {id}   = useLoaderData() as {id: string};
+function NewListing() {
 
   
   const onConnect = (provider: ProviderRpcClient | undefined, address: Address | undefined) => {
@@ -34,16 +29,15 @@ function ListingPage() {
     init();
   }, []);
 
-  if(id){
   return (
     <>
+    <Toaster/>
     <Nav onConnect={(provider, address) => onConnect(provider, address)} venomConnect={venomConnect}/>
     <SideNav/>
-    <ListingContainer userProvider={provider} userAddress={address} venomConnect={venomConnect} id={id}/>
+    {address ? <CreationContainer userProvider={provider} userAddress={address} venomConnect={venomConnect}/> : <div className='center'>Connect your wallet to create a listing.</div>}
+
     </>
   );
-  }else{
-    return <></>
   }
-}
-export default ListingPage;
+
+export default NewListing;

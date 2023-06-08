@@ -12,6 +12,7 @@
     "@types/react-dom": "^18.2.4",
     "everscale-inpage-provider": "^0.3.61",
     "everscale-standalone-client": "^2.1.19",
+    "ipfs-http-client": "^60.0.1",
     "localforage": "^1.10.0",
     "match-sorter": "^6.3.1",
     "react": "^18.2.0",
@@ -50,5 +51,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/react-router-dom": "^5.3.3"
   }
 }
