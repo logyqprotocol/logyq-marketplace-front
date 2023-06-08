@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { VenomConnect } from 'venom-connect';
 import Styles from './styles/ConnectWallet.module.css';
 import {formatBalance, getShortAddress} from '../utils/functions';
@@ -22,8 +22,9 @@ function ConnectWallet(props: { venomConnect: VenomConnect | undefined, onConnec
 
   const getBalance = async (provider: any) => {
     const providerState = await provider?.getProviderState?.();
-    const _address : Address = providerState?.permissions.accountInteraction?.address;
-    return (await provider?.getBalance?.(_address));
+    const _address : Address = await providerState?.permissions.accountInteraction?.address;
+    const _balance : string = await provider?.getBalance?.(_address);
+    return _balance;
   };
 
   // Any interaction with venom-wallet (address fetching is included) needs to be authentificated
@@ -43,7 +44,8 @@ function ConnectWallet(props: { venomConnect: VenomConnect | undefined, onConnec
 
   useEffect(() => {
     props.onConnect(venomProvider, address);
-  }, [venomProvider, address, props]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [venomProvider, address]);
 
     
   // This handler will be called after venomConnect.disconnect() action
@@ -70,6 +72,7 @@ function ConnectWallet(props: { venomConnect: VenomConnect | undefined, onConnec
     return () => {
       off?.();
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.venomConnect]);
 
   return (

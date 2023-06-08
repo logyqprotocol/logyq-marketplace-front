@@ -13,6 +13,7 @@
 
 .left{
     padding: 20px;
+    padding-left: 80px;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -31,7 +32,6 @@
     padding: 20px;    flex-wrap: wrap;
     width: 100%;
     display: flex;
-
 }
 
 .imgBox{
@@ -74,7 +74,7 @@
     }
   }
     
-.card input[type="number"]{
+.card input{
     width: 100%;
     padding: 10px;
     border-radius: 10px;
@@ -117,3 +117,4 @@
     opacity: 1;
 
 }
+

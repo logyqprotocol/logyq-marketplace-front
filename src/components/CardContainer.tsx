@@ -30,6 +30,7 @@ function CardContainer(props: { venomConnect: VenomConnect | undefined, address?
         }else{
             fetchListings(provider);
         }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.venomConnect, provider]);
 
   const fetchListings = async (
@@ -64,7 +65,7 @@ function CardContainer(props: { venomConnect: VenomConnect | undefined, address?
           </div>}
         {props.address && !isLoading && <h1 className="w100">Your listings</h1>}
         <Loader isLoading={isLoading} />
-        {listings?.filter((listing) => !listing.sold).length == 0 && !isLoading && (
+        {listings?.filter((listing) => !listing.sold).length === 0 && !isLoading && (
             <div className="center">There are no listings.</div>
         )}
         {listings &&
@@ -72,21 +73,21 @@ function CardContainer(props: { venomConnect: VenomConnect | undefined, address?
           listings.length > 0 &&
           listings.filter((listing : Listing) => {
             if(props.address){
-                return listing.seller.toString().toLowerCase() == props.address.toString().toLowerCase();
+                return listing.seller.toString().toLowerCase() === props.address.toString().toLowerCase();
             }
             if(showSold){
                 return listing.title.toLowerCase().includes(query.toLowerCase()) || listing.seller.toString().toLowerCase().includes(query.toLowerCase());
             }else{
                 return !listing.sold && (listing.title.toLowerCase().includes(query.toLowerCase()) || listing.seller.toString().toLowerCase().includes(query.toLowerCase()));
             }
-          }).length == 0 && (
+          }).length === 0 && (
           <div className="center">There are no listings with this criteria.</div>
           )}
         {listings &&
           !isLoading &&
           listings.filter((listing : Listing) => {
             if(props.address){
-                return listing.seller.toString().toLowerCase() == props.address.toString().toLowerCase();
+                return listing.seller.toString().toLowerCase() === props.address.toString().toLowerCase();
             }
             if(showSold){
                 return listing.title.toLowerCase().includes(query.toLowerCase()) || listing.seller.toString().toLowerCase().includes(query.toLowerCase());

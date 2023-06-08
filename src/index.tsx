@@ -7,29 +7,30 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-import ErrorPage from './pages/ErrorPage';
 import ListingPage, { loader as ListingLoader } from './pages/ListingPage';
+import NewListing from './pages/New';
+import MyListings from './pages/MyListings';
 
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App/>,
-    errorElement: <ErrorPage />,
   },
   {
     path: "listing/new",
-    element: <div>listing/new</div>,
+    element: <NewListing />,
   },
   {
     path: "listing/my",
-    element: <div>listing/my</div>,
+    element: <MyListings />,
   },
   {
     path: "listing/:listingId",
     element: <ListingPage />,
     loader: ListingLoader
   },
+
 ]);
 
 const root = ReactDOM.createRoot(

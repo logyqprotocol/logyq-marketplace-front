@@ -1,11 +1,10 @@
-import { useEffect, useState } from 'react';
-import { initVenomConnect } from '../venom-connect/configure';
+import React, { useEffect, useState } from 'react';
 import VenomConnect from 'venom-connect';
 import CardContainer from '../components/CardContainer';
 import Nav from '../components/Nav';
+import { initVenomConnect } from '../venom-connect/configure';
 import SideNav from '../components/SideNav';
-
-function App() {
+function MyListings() {
   const [venomConnect, setVenomConnect] = useState<VenomConnect | undefined>();
   const init = async () => {
     const _venomConnect = await initVenomConnect();
@@ -23,13 +22,12 @@ function App() {
   const [provider, setProvider] = useState<any>(undefined);
   const [address, setAddress] = useState<any>(undefined);
   return (
-    
     <>
       <Nav onConnect={onConnect} venomConnect={venomConnect}/>
       <SideNav/>
-      <CardContainer venomConnect={venomConnect}/>
+      {address ? <CardContainer address={address} venomConnect={venomConnect}/> : <div className='center'>Connect your wallet to view your listings.</div>}
     </>
   );
 }
 
-export default App;
+export default MyListings;

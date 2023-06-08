@@ -39,6 +39,7 @@ function ListingContainer(props: {
       fetchListing(provider);
       fetchOffers(provider);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.venomConnect, provider]);
 
   
@@ -71,7 +72,7 @@ function ListingContainer(props: {
         .call()) as any;
       if (!rawOffers) return undefined;
       let _offers: any[] = [];
-      rawOffers["offers"].filter((offer: any) => offer[1]['status'] == "0").forEach((offer: any) => {
+      rawOffers["offers"].filter((offer: any) => offer[1]['status'] === "0").forEach((offer: any) => {
         offer[1]["id"] = offer[0];
         _offers.push(offer[1]);
       });

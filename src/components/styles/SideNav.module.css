@@ -1,0 +1,74 @@
+.sideNav{
+    padding: 100px 0;
+    background-color: #34398d;
+    width: 50px;
+    height: 100vh;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 0;
+    transition: width 0.5s ease-in-out;
+    -webkit-box-shadow: 10px -6px 10px rgba(50, 50, 50, 0.1);
+    -moz-box-shadow: 10px -6px 10px rgba(50, 50, 50, 0.1);
+    box-shadow: 10px -6px 10px rgba(50, 50, 50, 0.1);
+    overflow: hidden;
+}
+
+.open{
+    transition: width 0.5s ease-in-out;
+    width: 200px;
+}
+
+.openButton{
+    color: white;
+    position: absolute;
+    top: 100px;
+    right: 20px;
+    cursor: pointer;
+    transition: transform 0.5s ease-in-out;
+}
+
+.menuContainer{
+    margin-top: 40px;
+    position: relative;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.show{
+    display: block;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.menuContainer .menu{
+    width: 200px;
+}
+
+.menuContainer li{
+    display: block;
+    width: 100%;
+}
+
+.menuContainer button{
+    color: white;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    cursor: pointer;
+}
+
+.menuContainer li button:disabled{
+    cursor:default;
+}
+
+.menuContainer button:hover{
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.open .openButton{
+    transform: rotate(-180deg);
+    transition: transform 0.5s ease-in-out;
+}
+
+

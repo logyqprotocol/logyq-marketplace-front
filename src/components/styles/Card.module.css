@@ -5,7 +5,7 @@
    0%, #BB494A
    100%);
     border-radius: 30px;
-    height: 310px;
+    height: 330px;
     width: calc(33% - 10px);
     padding: 4px;
   }
@@ -128,3 +128,40 @@
   flex-shrink: 0;
 
 }
+
+/* Creation container */
+
+.formBorderContainer{
+  background: linear-gradient(to right , #34398D
+  0%, #BB494A
+  100%);
+   border-radius: 30px;
+   height: auto;
+   width: 100%;
+   padding: 4px;
+}
+
+.formInnerContainer{
+  padding: 100px;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  border-radius: 25px;
+  overflow: hidden;
+}
+
+.formInnerContainer input, .formInnerContainer textarea{
+  margin-top: 5px;
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  outline: none;
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+.formInnerContainer textarea{
+  height: 200px;
+}
+
