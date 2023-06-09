@@ -1,3 +1,11 @@
+# Marketplace Dapp
+
+We have developed a Dapp that allows users to seamlessly engage with marketplace smart contracts. This Dapp is easily accessible from any desktop device browser. It offers a user-friendly dashboard that displays both active and closed listings. For sellers, we have designed two dedicated sections. The first section enables them to create listings, while the second section allows them to explore their listings and accept or decline offers from buyers. Buyers have the ability to expand listings directly on the homepage, where they can view all the listing details and make offers.
+
+Additionally, we have deployed an online live version of the Dapp, which can be accessed through this link: https://demarketplace-5laniqptga-ew.a.run.app/
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
