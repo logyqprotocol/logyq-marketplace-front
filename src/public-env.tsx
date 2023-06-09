@@ -5,8 +5,10 @@ let INFURA_IPFS_SECRET: string;
 
 CONTRACT_ADDR="0:aee8c95405ed379a37834d8f0eb8d7f002f262b413ad998cc0326e6ef1c2b8a4"
 EXPLORER="https://devnet.venomscan.com"
-INFURA_IPFS_PROJECTID="2Qrf4Y7zSlEJ4G3z00h2i9wSQ9w"
-INFURA_IPFS_SECRET="62bc5837b9a590022ca6456768aaa13d"
+
+// TODO: add upload image to IPFS
+INFURA_IPFS_PROJECTID=""
+INFURA_IPFS_SECRET=""
 
 /*
 TODO: configure Dockerfile and Cloud Run to support env variables (different from usual next config)

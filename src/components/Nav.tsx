@@ -13,6 +13,9 @@ function Nav(props: {venomConnect: VenomConnect | undefined, onConnect: (provide
         <div className={Styles.logo}>
             <img onClick={() => navigate("/")} src={navLogo} alt="logyq's logo"/>
         </div>
+        <div className={Styles.devtext}> | Devnet version |</div>
+        <div></div>
+        <div></div>
         <ConnectWallet venomConnect={props.venomConnect} onConnect={(provider, address) => props.onConnect(provider, address)}/>
         </div>
     </div>
