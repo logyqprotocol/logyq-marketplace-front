@@ -15,6 +15,7 @@ function BiddingContainer(props: {
   userProvider: ProviderRpcClient | undefined;
   isClosed: boolean;
   listing: Listing;
+  refetchOffers: Function;
 }) {
   const navigate = useNavigate();
 
@@ -29,6 +30,11 @@ function BiddingContainer(props: {
     if (parseFloat(amount) < 0.1) {
       //Offer too low should be at least 0.1
       setError("Offer too low. Should be at least 0.1 VENOM");
+      return;
+    }
+    if (parseInt(getValueForSend(parseFloat(amount))) > parseFloat(props.listing.price)) {
+      //Offer too low should be at least 0.1
+      setError("Offer too high. The offer is higher than the listing price.");
       return;
     }
     makeOffer(parseFloat(amount));
@@ -61,7 +67,7 @@ function BiddingContainer(props: {
         setTimeout(() => {
           toast.dismiss(toastId);
           toast.success("Bid placed.");
-          navigate(`/listing/${props.listingId}`);
+          props.refetchOffers()
         }, 5000);
         toast.dismiss(toastId);
       } else {

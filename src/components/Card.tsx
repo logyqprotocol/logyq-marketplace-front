@@ -15,7 +15,7 @@ function Card(props: {listing: Listing}) {
     {/* TODO: ADD IMAGE HERE */}
     </div>
     <div className={Styles.infoContainer}>
-        <h4 onClick={() =>     navigate(`/listing/${props.listing.id}`)}><a href="#">{props.listing.title}</a></h4>
+        <h4 onClick={() =>     navigate(`/listing/${props.listing.id}`)}>{props.listing.title}</h4>
         <span>{`${formatBalance(props.listing.price)} VENOM (${convertToUsd(props.listing.price)} USD)` }</span>
         <span>{`${getShortAddress(props.listing.seller)}`}</span>
         <span className={`${props.listing.sold ? "red" : "green"}`}>{`${props.listing.sold ? "Sold" : "Active"}`}</span>
