@@ -84,6 +84,11 @@ const declineOffer = async (
         toast.error(e.message);
     }
 }
+
+const reverse = (list: Offer[]) => {
+  const temp = [...list]
+  return temp.reverse(); 
+}
   if (props.offers) {
     return (
       <>
@@ -98,7 +103,7 @@ const declineOffer = async (
           </thead>
 
           <tbody>
-            {props.offers.reverse().map((offer) => (
+            {reverse(props.offers).map((offer) => (
               
                 <tr key={offer.id} >
                   <td data-th="Bidder">
