@@ -87,7 +87,7 @@ function BiddingContainer(props: {
       return <div className={Styles.card}>This listing is closed.</div>;
     } else if(!props.address){
       return <div className={Styles.card}>Connect your wallet to bid.</div>;
-    }else if(props.address == props.listing.seller){
+    }else if(props.address.toString() == props.listing.seller.toString()){
       return <div className={Styles.card}>You cannot bid for your own listing.</div>;
     } else {
       return (
