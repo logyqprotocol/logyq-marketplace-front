@@ -83,7 +83,7 @@ function ConnectWallet(props: { venomConnect: VenomConnect | undefined, onConnec
         {address && balance && <div className={Styles.walletContainer}>
             <span className={Styles.balance}>{formatBalance(balance)} VENOM</span>
             <span className={Styles.address}>{getShortAddress(address)}</span>
-            <button className={Styles.btn} onClick={onDisconnect}>Log out</button>
+            <button className={Styles.btn} onClick={onDisconnect}>Disconnect</button>
             </div>
         }
       </>

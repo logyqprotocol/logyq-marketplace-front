@@ -84,6 +84,11 @@ const declineOffer = async (
         toast.error(e.message);
     }
 }
+
+const reverse = (list: Offer[]) => {
+  const temp = [...list]
+  return temp.reverse(); 
+}
   if (props.offers) {
     return (
       <>
@@ -93,13 +98,12 @@ const declineOffer = async (
             <tr>
               <th>Bidder</th>
               <th>Amount</th>
-              <th>Date</th>
               {props.isSeller && <th>Actions</th>}
             </tr>
           </thead>
 
           <tbody>
-            {props.offers.map((offer) => (
+            {reverse(props.offers).map((offer) => (
               
                 <tr key={offer.id} >
                   <td data-th="Bidder">
@@ -118,10 +122,7 @@ const declineOffer = async (
                       data-tooltip-id={"amount-tooltip"}
                     >{`${formatBalance(offer.amount)} VENOM`}</span>
                   </td>
-                  <td data-th="Date">
-                  {(new Date(parseInt(offer.timestamp)).toLocaleString())}
-
-                  </td>
+                  
                   {props.isSeller && (
                     <td>
                       <button
