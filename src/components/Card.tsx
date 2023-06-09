@@ -11,11 +11,11 @@ function Card(props: {listing: Listing}) {
   return (
     <div className={Styles.borderContainer}>
   <div className={Styles.innerContainer}>
-    <div className={Styles.imageContainer}>
+    <div onClick={() =>     navigate(`/listing/${props.listing.id}`)} className={Styles.imageContainer}>
     {/* TODO: ADD IMAGE HERE */}
     </div>
     <div className={Styles.infoContainer}>
-        <h4 onClick={() =>     navigate(`/listing/${props.listing.id}`)}>{props.listing.title}</h4>
+        <h4 onClick={() =>     navigate(`/listing/${props.listing.id}`)}><a href="#">{props.listing.title}</a></h4>
         <span>{`${formatBalance(props.listing.price)} VENOM (${convertToUsd(props.listing.price)} USD)` }</span>
         {/* Sorry, I know this is a bit sketchy */}
         <span>{(new Date(parseInt(props.listing.timestamp) + 524717112000).toLocaleString())}</span>
