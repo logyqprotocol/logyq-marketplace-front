@@ -57,7 +57,7 @@ function BiddingContainer(props: {
       );
       const result = await contract.methods
         .makeOffer({
-          _amount: getValueForSend(amount),
+          _amount: getValueForSend(_amount),
           _listingId: props.listingId,
         } as never)
         .send({
