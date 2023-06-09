@@ -17,8 +17,10 @@ function Card(props: {listing: Listing}) {
     <div className={Styles.infoContainer}>
         <h4 onClick={() =>     navigate(`/listing/${props.listing.id}`)}>{props.listing.title}</h4>
         <span>{`${formatBalance(props.listing.price)} VENOM (${convertToUsd(props.listing.price)} USD)` }</span>
-        <span>{(new Date(parseInt(props.listing.timestamp)).toLocaleString())}</span>
+        {/* Sorry, I know this is a bit sketchy */}
+        <span>{(new Date(parseInt(props.listing.timestamp) + 524717112000).toLocaleString())}</span>
         <span>{`${getShortAddress(props.listing.seller)}`}</span>
+        <span className={`${props.listing.sold ? "red" : "green"}`}>{`${props.listing.sold ? "Sold" : "Active"}`}</span>
         </div>
   </div>
 </div>
