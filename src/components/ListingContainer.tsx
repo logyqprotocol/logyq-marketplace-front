@@ -104,8 +104,7 @@ function ListingContainer(props: {
               <p>{listing.description}</p>
             </div>
           </div>
-          {/* TODO: === to !== */}
-          { props.userAddress?.toString() === listing.seller.toString() && <BiddingContainer listing={listing} isClosed={listing.sold} userProvider={props.userProvider} listingId={props.id as string} address={props.userAddress}/>}
+          { props.userAddress?.toString() !== listing.seller.toString() && <BiddingContainer  refetchOffers={() => fetchOffers(provider)} listing={listing} isClosed={listing.sold} userProvider={props.userProvider} listingId={props.id as string} address={props.userAddress}/>}
           </div>
         <div className={Styles.right}>
           <OffersTable address={props.userAddress} userProvider={props.userProvider} listingId={props.id as string} isSeller={true} offers={offers} />
