@@ -6,6 +6,7 @@ import { Address, ProviderRpcClient } from 'everscale-inpage-provider';
 import CreationContainer from '../components/CreationContainer';
 import { Toaster } from 'react-hot-toast';
 import SideNav from '../components/SideNav';
+import Overlay from '../components/Overlay';
 
 
 
@@ -31,6 +32,7 @@ function NewListing() {
 
   return (
     <>
+    <Overlay/>
     <Toaster/>
     <Nav onConnect={(provider, address) => onConnect(provider, address)} venomConnect={venomConnect}/>
     <SideNav/>

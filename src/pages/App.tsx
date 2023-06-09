@@ -4,6 +4,7 @@ import VenomConnect from 'venom-connect';
 import CardContainer from '../components/CardContainer';
 import Nav from '../components/Nav';
 import SideNav from '../components/SideNav';
+import Overlay from '../components/Overlay';
 
 function App() {
   const [venomConnect, setVenomConnect] = useState<VenomConnect | undefined>();
@@ -25,6 +26,7 @@ function App() {
   return (
     
     <>
+      <Overlay/>
       <Nav onConnect={onConnect} venomConnect={venomConnect}/>
       <SideNav/>
       <CardContainer venomConnect={venomConnect}/>

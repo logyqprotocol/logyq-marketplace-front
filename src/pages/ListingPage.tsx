@@ -6,6 +6,7 @@ import ListingContainer from '../components/ListingContainer';
 import { Address, ProviderRpcClient } from 'everscale-inpage-provider';
 import { useLoaderData, LoaderFunctionArgs } from "react-router-dom";
 import SideNav from '../components/SideNav';
+import Overlay from '../components/Overlay';
 
 
 export async function loader({ params } : LoaderFunctionArgs) {
@@ -37,6 +38,7 @@ function ListingPage() {
   if(id){
   return (
     <>
+    <Overlay/>
     <Nav onConnect={(provider, address) => onConnect(provider, address)} venomConnect={venomConnect}/>
     <SideNav/>
     <ListingContainer userProvider={provider} userAddress={address} venomConnect={venomConnect} id={id}/>

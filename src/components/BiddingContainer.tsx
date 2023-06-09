@@ -8,21 +8,20 @@ import Abi from "../abis/Marketplace.abi.json";
 
 import { CONTRACT_ADDR } from "../public-env";
 import toast, { Toaster } from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import Loader from "./Loader";
 function BiddingContainer(props: {
   address?: Address;
   listingId: string | undefined;
   userProvider: ProviderRpcClient | undefined;
   isClosed: boolean;
-  listing: Listing;
+  listing: Listing | undefined;
   refetchOffers: Function;
 }) {
-  const navigate = useNavigate();
-
   const [amount, setAmount] = React.useState<string>("");
   const [error, setError] = React.useState<string>("");
 
   const validateInput = () => {
+    setError("")
     if (amount === "") {
       setError("Please enter a valid amount.");
       return;
@@ -32,7 +31,10 @@ function BiddingContainer(props: {
       setError("Offer too low. Should be at least 0.1 VENOM");
       return;
     }
-    if (parseInt(getValueForSend(parseFloat(amount))) > parseFloat(props.listing.price)) {
+    if (
+      parseInt(getValueForSend(parseFloat(amount))) >
+      parseFloat(props.listing!.price)
+    ) {
       //Offer too low should be at least 0.1
       setError("Offer too high. The offer is higher than the listing price.");
       return;
@@ -67,7 +69,7 @@ function BiddingContainer(props: {
         setTimeout(() => {
           toast.dismiss(toastId);
           toast.success("Bid placed.");
-          props.refetchOffers()
+          props.refetchOffers();
         }, 5000);
         toast.dismiss(toastId);
       } else {
@@ -80,36 +82,43 @@ function BiddingContainer(props: {
     }
   };
 
-  if (!props.isClosed) {
-    return (
-      <>
-        <Toaster />
-        <div className={Styles.card}>
-          <div className={`${Styles.card} ${Styles.noWrap}`}>
-            <input
-              type="number"
-              placeholder="VENOM"
-              onChange={(e) => setAmount(e.target.value)}
-              className={Styles.input}
-            ></input>
-            <button className={Styles.btn} onClick={validateInput}>
-              Place bid
-            </button>
+  if (props.listing) {
+    if (props.listing.sold) {
+      return <div className={Styles.card}>This listing is closed.</div>;
+    } else if(!props.address){
+      return <div className={Styles.card}>Connect your wallet to bid.</div>;
+    }else if(!props.address.equals(props.listing.seller)){
+      return <div className={Styles.card}>You cannot bid for your own listing.</div>;
+    } else {
+      return (
+        <>
+          <Toaster />
+          <div className={Styles.card}>
+            <div className={`${Styles.card} ${Styles.noWrap}`}>
+              <input
+                type="number"
+                placeholder="VENOM"
+                onChange={(e) => setAmount(e.target.value)}
+                className={Styles.input}
+              ></input>
+              <button className={Styles.btn} onClick={validateInput}>
+                Place bid
+              </button>
 
-            <button
-              className={`${Styles.btn} ${Styles.btnOutlined}`}
-              onClick={() => makeOffer(parseInt(props.listing.price))}
-            >
-              Buy now ({formatBalance(props.listing.price)} VENOM)
-            </button>
+              <button
+                className={`${Styles.btn} ${Styles.btnOutlined}`}
+                onClick={() => makeOffer(parseInt(props.listing!.price))}
+              >
+                Buy now ({formatBalance(props.listing.price)} VENOM)
+              </button>
+            </div>
+            <div className={`errorBox ${Styles.center}`}>{error}</div>
           </div>
-          <div className="errorBox center">{error}</div>
-        </div>
-      </>
-    );
+        </>
+      );
+    }
   } else {
-    return <div className={Styles.card}>This listing is closed.</div>;
+    return <div className={Styles.card}><Loader isLoading={true}/></div>;;
   }
 }
-
 export default BiddingContainer;

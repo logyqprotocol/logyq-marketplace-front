@@ -4,6 +4,7 @@ import CardContainer from '../components/CardContainer';
 import Nav from '../components/Nav';
 import { initVenomConnect } from '../venom-connect/configure';
 import SideNav from '../components/SideNav';
+import Overlay from '../components/Overlay';
 function MyListings() {
   const [venomConnect, setVenomConnect] = useState<VenomConnect | undefined>();
   const init = async () => {
@@ -23,6 +24,7 @@ function MyListings() {
   const [address, setAddress] = useState<any>(undefined);
   return (
     <>
+      <Overlay/>
       <Nav onConnect={onConnect} venomConnect={venomConnect}/>
       <SideNav/>
       {address ? <CardContainer address={address} venomConnect={venomConnect}/> : <div className='center'>Connect your wallet to view your listings.</div>}

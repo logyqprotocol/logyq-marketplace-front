@@ -13,6 +13,7 @@ import "react-tooltip/dist/react-tooltip.css";
 import { formatBalance, getShortAddress } from "../utils/functions";
 import BiddingContainer from "./BiddingContainer";
 import { Listing } from "../utils/entities";
+import ListingInfo from "./ListingInfo";
 
 function ListingContainer(props: {
   venomConnect: VenomConnect | undefined;
@@ -87,32 +88,17 @@ function ListingContainer(props: {
   };
 
 
-  if (listing && offers && !isLoading) {
     return (
       <div className={Styles.listingContainer}>
         <div className={Styles.left}>
-          <div className={Styles.card}>
-            <div className={Styles.imgBox}>{/* TODO: Add image here */}</div>
-            <div className={Styles.infoBox}>
-              <h2>{listing.title}</h2>
-              <div>{formatBalance(listing.price)} VENOM</div>
-                <div>Owned by <a href={`${EXPLORER}/accounts/${listing.seller.toString()}`}>{getShortAddress(listing.seller, 7,7)}</a></div>
-              <div>This listing received {listing.offersCounter} {parseInt(listing.offersCounter) !== 1 ? "offers" : "offer"}</div>
-            </div>
-            <div className={Styles.descBox}>
-              <h3>Description</h3>
-              <p>{listing.description}</p>
-            </div>
-          </div>
-          { props.userAddress?.toString() !== listing.seller.toString() && <BiddingContainer  refetchOffers={() => fetchOffers(provider)} listing={listing} isClosed={listing.sold} userProvider={props.userProvider} listingId={props.id as string} address={props.userAddress}/>}
+        <ListingInfo listing={listing}/>
+          <BiddingContainer  refetchOffers={() => fetchOffers(provider)} listing={listing} isClosed={!!listing?.sold && false} userProvider={props.userProvider} listingId={props.id as string} address={props.userAddress}/>
           </div>
         <div className={Styles.right}>
-          <OffersTable address={props.userAddress} userProvider={props.userProvider} listingId={props.id as string} isSeller={true} offers={offers} />
+          <OffersTable address={props.userAddress} userProvider={props.userProvider} listingId={props.id as string} isSeller={props.userAddress?.toString() === listing?.seller.toString()} offers={offers} />
         </div>
       </div>
     );
-  } else {
-    return <></>
-    }
-}
+  }
+
 export default ListingContainer;

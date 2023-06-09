@@ -34,6 +34,11 @@
     display: flex;
 }
 
+.center{
+    margin: 10px auto;
+}
+
+
 .imgBox{
     width: 300px;
     height: 300px;    
@@ -71,6 +76,9 @@
     .infoBox{
         width: 100%;
         padding: 20px 0px;
+    }
+    .right{
+        padding-left: 50px;
     }
   }
     
